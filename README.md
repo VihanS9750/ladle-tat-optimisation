@@ -16,6 +16,15 @@ Amalgam Steel's Ladle Furnace (LF) cycle currently runs at **~70 min**, far exce
 
 **Headline result:** The 70-min cycle is **not driven by physics — it is driven by sub-optimal slag chemistry**. With 4.43× kinetic enhancement, 40 min of IF pre-treatment, and proper scheduling, the **8 IF + 2 LF** configuration achieves a deterministic TAT of **37.6 min** with arc energy of just **27 kWh/T** against a 100 kWh/T limit. A 2 000-heat Monte Carlo simulation confirms **91.5%** of heats meet the 40-min limit. The **4 IF + 1 LF** alternative is *near-feasible deterministically but operationally unstable* — minimum TAT 41.1 min.
 
+<p align="center">
+  <img src="plots/06_tat_breakdown.png" width="48%" alt="TAT breakdown — Case 1"/>
+  <img src="plots/04_monte_carlo.png" width="48%" alt="Monte Carlo validation (2,000 heats)"/>
+</p>
+<p align="center">
+  <img src="plots/01_erlang_c_analysis.png" width="48%" alt="Erlang-C queue analysis"/>
+  <img src="plots/05_sensitivity_analysis.png" width="48%" alt="Sensitivity analysis"/>
+</p>
+
 ---
 
 ## The central insight
