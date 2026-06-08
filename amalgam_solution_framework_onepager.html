@@ -1,0 +1,279 @@
+<style>
+.op{font-family:var(--font-sans);font-size:11px;line-height:1.4;color:var(--color-text-primary);display:flex;flex-direction:column;gap:0;}
+.hdr{background:var(--color-background-secondary);padding:10px 14px;border-radius:var(--border-radius-lg) var(--border-radius-lg) 0 0;border:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.row{display:grid;border-left:0.5px solid var(--color-border-tertiary);border-right:0.5px solid var(--color-border-tertiary);}
+.cell{padding:9px 11px;border:0.5px solid var(--color-border-tertiary);border-top:none;border-right:none;}
+.cell:last-child{border-right:0.5px solid var(--color-border-tertiary);}
+.mod-title{font-size:12px;font-weight:500;margin-bottom:6px;display:flex;align-items:center;gap:5px;}
+.eq{font-family:var(--font-mono);font-size:9.5px;background:var(--color-background-secondary);color:var(--color-text-secondary);padding:2px 6px;border-radius:4px;display:block;margin:2px 0;letter-spacing:-.2px;}
+.kv{display:flex;justify-content:space-between;align-items:baseline;padding:1.5px 0;border-bottom:0.5px solid var(--color-border-tertiary);}
+.kv:last-child{border:none;}
+.kk{color:var(--color-text-secondary);}
+.vv{font-weight:500;}
+.dot{width:8px;height:8px;border-radius:2px;display:inline-block;flex-shrink:0;}
+.tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:500;}
+.t-pu{background:#EEEDFE;color:#3C3489;}
+.t-am{background:#FAEEDA;color:#633806;}
+.t-gr{background:#EAF3DE;color:#27500A;}
+.t-bl{background:#E6F1FB;color:#0C447C;}
+.t-te{background:#E1F5EE;color:#085041;}
+.t-re{background:#FCEBEB;color:#791F1F;}
+.t-gy{background:#F1EFE8;color:#444441;}
+.t-co{background:#FAECE7;color:#712B13;}
+@media(prefers-color-scheme:dark){
+.t-pu{background:#3C3489;color:#CECBF6;}
+.t-am{background:#633806;color:#FAC775;}
+.t-gr{background:#27500A;color:#C0DD97;}
+.t-bl{background:#0C447C;color:#B5D4F4;}
+.t-te{background:#085041;color:#9FE1CB;}
+.t-re{background:#791F1F;color:#F7C1C1;}
+.t-gy{background:#444441;color:#D3D1C7;}
+.t-co{background:#712B13;color:#F5C4B3;}
+}
+.verdict-ok{font-size:13px;font-weight:500;color:#27500A;}
+.verdict-no{font-size:13px;font-weight:500;color:#791F1F;}
+@media(prefers-color-scheme:dark){
+.verdict-ok{color:#C0DD97;}
+.verdict-no{color:#F7C1C1;}
+}
+.stage{padding:7px 8px;border-radius:6px;text-align:center;flex:1;min-width:0;}
+.arr{color:var(--color-text-tertiary);font-size:14px;align-self:center;flex-shrink:0;}
+.sn{font-weight:500;font-size:11px;}
+.ss{font-size:9.5px;color:var(--color-text-secondary);}
+.ftr{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:none;border-radius:0 0 var(--border-radius-lg) var(--border-radius-lg);padding:8px 12px;display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.lbl{font-size:10px;color:var(--color-text-secondary);font-weight:500;}
+.bignum{font-size:19px;font-weight:500;line-height:1;}
+.ok{color:#27500A;} .ok2{color:#C0DD97;}
+.no{color:#791F1F;} .no2{color:#F7C1C1;}
+.sep{border-top:0.5px solid var(--color-border-tertiary);margin:5px 0;}
+</style>
+
+<div class="op">
+
+<div class="hdr">
+  <div>
+    <div style="font-size:15px;font-weight:500;">Ladle TAT Optimisation — Solution Framework</div>
+    <div style="font-size:10.5px;color:var(--color-text-secondary);">Amalgam Steel × IIT Madras &nbsp;·&nbsp; IF → LF → Continuous Caster &nbsp;·&nbsp; 5-component energy model &nbsp;·&nbsp; 2 000-heat Monte Carlo validation</div>
+  </div>
+  <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;">
+    <span class="tag t-bl">TAT ≤ 40 min</span>
+    <span class="tag t-am">E &lt; 100 kWh/T</span>
+    <span class="tag t-gr">%P ≤ 0.040%</span>
+    <span class="tag t-pu">ρ &lt; 1.0</span>
+    <span class="tag t-te">T<sub>cast</sub> ≥ 1625°C</span>
+    <span class="tag t-gy">E[Wq] ≤ 15 min</span>
+  </div>
+</div>
+
+<div class="row" style="grid-template-columns:1fr;">
+  <div class="cell" style="padding:10px 12px;">
+    <div style="font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:7px;letter-spacing:.3px;">PROCESS ROUTE &nbsp;·&nbsp; TAT = T<sub>tap_op</sub> + T<sub>tr1</sub> + E[W<sub>q</sub>] + T<sub>LF</sub> + T<sub>tr2</sub> = 25 + E[W<sub>q</sub>] + T<sub>LF</sub> &nbsp; (target ≤ 40 min)</div>
+    <div style="display:flex;align-items:stretch;gap:5px;">
+      <div class="stage t-gy">
+        <div class="sn">IF Furnace</div>
+        <div class="ss">165 min cycle</div>
+        <div class="ss">λ = M/T<sub>IF</sub></div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-co">
+        <div class="sn">Tapping</div>
+        <div class="ss">10 min</div>
+        <div class="ss" style="font-weight:500;">1 660°C ✓</div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-am">
+        <div class="sn">IF → LF Travel</div>
+        <div class="ss">10 min · Zone A</div>
+        <div class="ss">−50°C (empirical)</div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-pu">
+        <div class="sn">LF Queue</div>
+        <div class="ss">Wait = E[W<sub>q</sub>]</div>
+        <div class="ss">Erlang-C model</div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-bl">
+        <div class="sn">LF Arc Heating</div>
+        <div class="ss">T<sub>LF</sub> min</div>
+        <div class="ss">+ΔT arc · deP</div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-am">
+        <div class="sn">LF → Caster</div>
+        <div class="ss">5 min · Zone B</div>
+        <div class="ss">2–3°C/min loss</div>
+      </div>
+      <div class="arr">→</div>
+      <div class="stage t-te">
+        <div class="sn">Caster</div>
+        <div class="ss" style="font-weight:500;">≥ 1 625°C</div>
+        <div class="ss">Back-solved T<sub>exit</sub></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="grid-template-columns:1fr 1fr 1fr;">
+  <div class="cell" style="border-left:3px solid #854F0B;">
+    <div class="mod-title"><span class="dot" style="background:#EF9F27;"></span>Thermal model</div>
+    <span class="eq">Q<sub>rad</sub> = εσA<sub>top</sub>(T<sub>s</sub>⁴ − T<sub>∞</sub>⁴) / 1000 kW</span>
+    <span class="eq">Q<sub>cond</sub> = 0.70 · A<sub>wall</sub>(T<sub>s</sub>−T<sub>∞</sub>) / (R<sub>brick</sub>+R<sub>conv</sub>)</span>
+    <span class="eq">dT/dt = Q<sub>total</sub>·1000 / (m·C<sub>p</sub>) · 60 °C/min</span>
+    <div class="sep"></div>
+    <div class="kv"><span class="kk">Ladle diameter</span><span class="vv">1.6 m</span></div>
+    <div class="kv"><span class="kk">Refrac. thickness</span><span class="vv">0.15 m · MgO-C</span></div>
+    <div class="kv"><span class="kk">k<sub>brick</sub></span><span class="vv">2.0 W m⁻¹K⁻¹</span></div>
+    <div class="kv"><span class="kk">ε<sub>slag</sub> / ε<sub>open</sub></span><span class="vv">0.40 / 0.85</span></div>
+    <div class="kv"><span class="kk">C<sub>p,steel</sub></span><span class="vv">800 J kg⁻¹K⁻¹</span></div>
+    <div class="kv"><span class="kk">Zone A loss</span><span class="vv">50°C fixed (confirmed)</span></div>
+    <div class="kv"><span class="kk">Zone B rate</span><span class="vv">2–3°C/min</span></div>
+    <div class="kv"><span class="kk">T<sub>exit</sub> method</span><span class="vv">Brent back-solve</span></div>
+    <div class="kv"><span class="kk">ODE step</span><span class="vv">Δt = 0.5 min explicit</span></div>
+  </div>
+  <div class="cell" style="border-left:3px solid #534AB7;">
+    <div class="mod-title"><span class="dot" style="background:#7F77DD;"></span>Erlang-C queue (M/M/N)</div>
+    <span class="eq">λ = M/T<sub>IF</sub>  ·  μ = 1/T<sub>LF</sub>  ·  ρ = λ/(Nμ)</span>
+    <span class="eq">C(N,ρ) = [(Nρ)ᴺ/N!(1−ρ)] / [Σ(Nρ)ᵏ/k! + …]</span>
+    <span class="eq">E[Wq] = C(N,ρ) / (Nμ − λ)</span>
+    <div class="sep"></div>
+    <div class="kv"><span class="kk">T<sub>IF</sub> (heat cycle)</span><span class="vv">165 min</span></div>
+    <div class="kv"><span class="kk">Arrival model</span><span class="vv">Erlang-3 (MC) / Poisson (det.)</span></div>
+    <div class="kv"><span class="kk">Service dist.</span><span class="vv">Log-normal CV = 0.20</span></div>
+    <div class="kv"><span class="kk">ρ advisory</span><span class="vv">&lt; 0.40 for robustness</span></div>
+    <div class="kv"><span class="kk">Hold limit W<sub>hold</sub></span><span class="vv">15 min</span></div>
+    <div class="kv"><span class="kk">Scan step</span><span class="vv">0.1 min increments</span></div>
+    <div class="kv"><span class="kk">Stability</span><span class="vv">ρ &lt; 1.0 enforced</span></div>
+    <div class="sep"></div>
+    <div style="font-size:10px;color:var(--color-text-secondary);">6 simultaneous constraints checked at every T<sub>LF</sub> candidate. Minimum feasible T<sub>LF</sub> = optimum.</div>
+  </div>
+  <div class="cell" style="border-left:3px solid #3B6D11;border-right:0.5px solid var(--color-border-tertiary);">
+    <div class="mod-title"><span class="dot" style="background:#639922;"></span>Dephosphorisation kinetics</div>
+    <span class="eq">P(t) = P₀ · exp(−k<sub>eff</sub> · t)  →  t<sub>LF</sub> = ln(P₁/P<sub>target</sub>) / k<sub>eff</sub></span>
+    <span class="eq">k<sub>eff</sub> = k<sub>base</sub>·exp[−Eₐ/R·(1/T−1/T₀)]·exp[3000(1/T₀−1/T)]</span>
+    <span class="eq">k<sub>enh</sub> = k<sub>eff</sub>·(B<sub>new</sub>/B<sub>old</sub>)⁰·⁵·(Q<sub>new</sub>/Q<sub>old</sub>)⁰·⁴·(FeO<sub>new</sub>/FeO<sub>old</sub>)⁰·⁵</span>
+    <div class="sep"></div>
+    <div class="kv"><span class="kk">k<sub>LF,base</sub></span><span class="vv">0.0116 min⁻¹ @ 1570°C</span></div>
+    <div class="kv"><span class="kk">E<sub>a</sub></span><span class="vv">50 000 J mol⁻¹</span></div>
+    <div class="kv"><span class="kk">P<sub>init</sub> range</span><span class="vv">0.08–0.10% (IF scrap)</span></div>
+    <div class="kv"><span class="kk">P<sub>target</sub></span><span class="vv">≤ 0.040%</span></div>
+    <div class="kv"><span class="kk">Basicity B: 2.5→4.5</span><span class="vv">Turkdogan corr.</span></div>
+    <div class="kv"><span class="kk">Ar flow: 0.1→0.4 L/min/T</span><span class="vv">Mazumdar–Evans</span></div>
+    <div class="kv"><span class="kk">FeO: 5→18%</span><span class="vv">oxidation promotion</span></div>
+    <div class="kv"><span class="kk">k<sub>enh</sub> / k<sub>base</sub></span><span class="vv">≈ 6× enhancement</span></div>
+  </div>
+</div>
+
+<div class="row" style="grid-template-columns:1fr;">
+  <div class="cell" style="border-left:3px solid #185FA5;padding:9px 12px;">
+    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <div style="font-size:10.5px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap;">5-COMPONENT ARC ENERGY</div>
+      <div style="display:flex;gap:5px;flex:1;flex-wrap:wrap;">
+        <div style="flex:1;min-width:90px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:2.5px solid #378ADD;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">[1] Steel sensible heat</div>
+          <div style="font-weight:500;">C<sub>p</sub>·ΔT<sub>arc</sub></div>
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">≈ 12 kWh/T</div>
+        </div>
+        <div style="flex:1;min-width:90px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:2.5px solid #7F77DD;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">[2] Slag heating</div>
+          <div style="font-weight:500;">4% mass +200°C</div>
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">≈ 2.7 kWh/T</div>
+        </div>
+        <div style="flex:1;min-width:90px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:2.5px solid #EF9F27;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">[3] Refractory absorp.</div>
+          <div style="font-weight:500;">E<sub>ref,nominal</sub></div>
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">8.0 kWh/T (fixed)</div>
+        </div>
+        <div style="flex:1;min-width:90px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:2.5px solid #1D9E75;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">[4] Dynamic losses</div>
+          <div style="font-weight:500;">∫Q<sub>rad+cond</sub>dt</div>
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">≈ 3 kWh/T</div>
+        </div>
+        <div style="flex:1;min-width:90px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-top:2.5px solid #A32D2D;border-radius:4px;padding:5px 7px;">
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">[5] DeP exotherm</div>
+          <div style="font-weight:500;">−ΔH<sub>deP</sub> credit</div>
+          <div style="font-size:9.5px;color:var(--color-text-secondary);">≈ −3 kWh/T</div>
+        </div>
+      </div>
+      <div style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:4px;padding:6px 10px;text-align:center;min-width:105px;flex-shrink:0;">
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">E<sub>arc</sub> = Σ[1..5] / η</div>
+        <div style="font-weight:500;font-size:13px;">≈ 22 kWh/T</div>
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">η = 0.75 (normal slag)</div>
+        <div style="font-size:9.5px;"><span class="tag t-bl">limit 100 kWh/T</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" style="grid-template-columns:1fr 1fr 1fr;">
+  <div class="cell" style="border-left:3px solid #0F6E56;">
+    <div class="mod-title"><span class="dot" style="background:#1D9E75;"></span>Case 1 — 8 IF + 2 LF</div>
+    <div class="verdict-ok">✓ FEASIBLE</div>
+    <div class="sep"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px;">
+      <div style="background:var(--color-background-secondary);border-radius:4px;padding:5px 7px;border:0.5px solid var(--color-border-tertiary);">
+        <div class="lbl">TAT</div><div class="bignum">37.6<span style="font-size:12px;font-weight:400;"> min</span></div>
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">headroom 2.4 min</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:4px;padding:5px 7px;border:0.5px solid var(--color-border-tertiary);">
+        <div class="lbl">T<sub>LF</sub> optimal</div><div class="bignum">11.6<span style="font-size:12px;font-weight:400;"> min</span></div>
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">feasible 11.6–15.3</div>
+      </div>
+    </div>
+    <div class="kv"><span class="kk">Utilisation ρ</span><span class="vv">0.281 <span class="tag t-te" style="font-size:9.5px;">✓ &lt;0.40</span></span></div>
+    <div class="kv"><span class="kk">E[W<sub>q</sub>]</span><span class="vv">0.99 min <span class="tag t-te" style="font-size:9.5px;">✓ &lt;15</span></span></div>
+    <div class="kv"><span class="kk">T<sub>at caster</sub></span><span class="vv">1625°C <span class="tag t-te" style="font-size:9.5px;">✓ MET</span></span></div>
+    <div class="kv"><span class="kk">Arc energy</span><span class="vv">22 kWh/T <span class="tag t-te" style="font-size:9.5px;">✓ &lt;100</span></span></div>
+    <div class="kv"><span class="kk">%P (worst case)</span><span class="vv">0.040% <span class="tag t-te" style="font-size:9.5px;">✓ MET</span></span></div>
+  </div>
+  <div class="cell" style="border-left:3px solid #A32D2D;">
+    <div class="mod-title"><span class="dot" style="background:#E24B4A;"></span>Case 2 — 4 IF + 1 LF</div>
+    <div class="verdict-no">✗ INFEASIBLE</div>
+    <div class="sep"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:6px;">
+      <div style="background:var(--color-background-secondary);border-radius:4px;padding:5px 7px;border:0.5px solid var(--color-border-tertiary);">
+        <div class="lbl">Best TAT (det.)</div><div class="bignum" style="color:#791F1F;">41.1<span style="font-size:12px;font-weight:400;"> min</span></div>
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">+1.1 min over limit</div>
+      </div>
+      <div style="background:var(--color-background-secondary);border-radius:4px;padding:5px 7px;border:0.5px solid var(--color-border-tertiary);">
+        <div class="lbl">MC P(TAT≤40)</div><div class="bignum" style="color:#791F1F;">89.2<span style="font-size:12px;font-weight:400;">%</span></div>
+        <div style="font-size:9.5px;color:var(--color-text-secondary);">216/2000 breach</div>
+      </div>
+    </div>
+    <div class="kv"><span class="kk">Utilisation ρ</span><span class="vv">0.281 <span class="tag t-te" style="font-size:9.5px;">✓ stable</span></span></div>
+    <div class="kv"><span class="kk">E[W<sub>q</sub>]</span><span class="vv">4.52 min <span class="tag t-te" style="font-size:9.5px;">✓ &lt;15</span></span></div>
+    <div class="kv"><span class="kk">T<sub>at caster</sub></span><span class="vv"><span class="tag t-re" style="font-size:9.5px;">✗ TAT constraint</span></span></div>
+    <div class="kv"><span class="kk">Arc energy</span><span class="vv">29.1 kWh/T <span class="tag t-te" style="font-size:9.5px;">✓ &lt;100</span></span></div>
+    <div class="kv"><span class="kk">Root cause</span><span class="vv">No T<sub>LF</sub> satisfies all 6</span></div>
+  </div>
+  <div class="cell" style="border-left:3px solid #5F5E5A;border-right:0.5px solid var(--color-border-tertiary);">
+    <div class="mod-title"><span class="dot" style="background:#888780;"></span>Monte Carlo validation · 2 000 heats</div>
+    <span class="eq">X<sub>i</sub> ∈ {m, P₀, Ṫ<sub>B</sub>, S} drawn independently per heat</span>
+    <div class="sep"></div>
+    <div class="kv"><span class="kk">Arrivals</span><span class="vv">Erlang-3 (k=3, CV=1/√3)</span></div>
+    <div class="kv"><span class="kk">Service time</span><span class="vv">Log-Normal, CV=0.20</span></div>
+    <div class="kv"><span class="kk">Tonnage</span><span class="vv">U[13, 17] T</span></div>
+    <div class="kv"><span class="kk">%P<sub>init</sub></span><span class="vv">U[0.08, 0.10]%</span></div>
+    <div class="kv"><span class="kk">Zone B rate</span><span class="vv">U[2.0, 3.0] °C/min</span></div>
+    <div class="sep"></div>
+    <div style="font-size:10px;font-weight:500;margin-bottom:3px;">Case 1 results</div>
+    <div class="kv"><span class="kk">Mean TAT / P95</span><span class="vv">36.6 / 40.9 min</span></div>
+    <div class="kv"><span class="kk">P(TAT ≤ 40 min)</span><span class="vv"><span class="tag t-te">91.5%</span></span></div>
+    <div class="kv"><span class="kk">Energy / %P / T viol.</span><span class="vv">0 / 0 / 0</span></div>
+  </div>
+</div>
+
+<div class="ftr">
+  <span style="font-size:10px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap;">KEY REFS:</span>
+  <span class="tag t-gy">Ghosh &amp; Chatterjee (2008)</span>
+  <span class="tag t-gy">Harikumar, IITM (2024)</span>
+  <span class="tag t-gy">Turkdogan (1996)</span>
+  <span class="tag t-gy">Mazumdar &amp; Evans (2010)</span>
+  <span class="tag t-gy">Gross &amp; Harris (1998)</span>
+  <span class="tag t-gy">Fruehan (1985)</span>
+  <span class="tag t-gy">Glaser et al. (2011)</span>
+  <span class="tag t-gy">Köhle (1992)</span>
+  <span style="margin-left:auto;font-size:10px;color:var(--color-text-tertiary);">Amalgam Steel × IITM · 2026</span>
+</div>
+
+</div>
