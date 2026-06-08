@@ -6,7 +6,7 @@
 B.Tech. Metallurgical and Materials Engineering, Indian Institute of Technology Madras
 In collaboration with **Amalgam Steel** · May 2026
 
-> **Attribution:** The problem statement was set by Amalgam Steel. All modelling, governing equations, code, analysis, and conclusions in this repository are the authors' own original work.
+> **Attribution:** The problem statement was set by Amalgam Steel. All modelling, governing equations, code, analysis, and conclusions in this repository are the authors' own original work. Process parameters are representative values from published literature (see References) — **no confidential company data is used.**
 
 ---
 
@@ -179,7 +179,7 @@ Large language models were used as engineering assistance tools for brainstormin
 
 ## License
 
-The original modelling framework, source code, and analysis are released under the **MIT License** (see [LICENSE](LICENSE)) — © 2026 Vihan Darshan Shah & Divyansh Sharma. The **problem statement was set by Amalgam Steel**, and any underlying plant data referenced remains the property of Amalgam Steel.
+The original modelling framework, source code, and analysis are released under the **MIT License** (see [LICENSE](LICENSE)) — © 2026 Vihan Darshan Shah & Divyansh Sharma. The problem statement was set by Amalgam Steel; all process parameters are drawn from published literature, with no confidential company data.
 
 ---
 
